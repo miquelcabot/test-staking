@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.6;
+pragma solidity >=0.6.0 <0.8.0;
 
-import "./Token.sol";
+import "./ZCX.sol";
 
 contract TokenFarm {
     string public name = "Token Farm";
-    Token public token;
+    ZCX public zcx;
 
-    constructor (Token _token) public {
-      token = _token;
+    constructor (ZCX _zcx) public {
+      zcx = _zcx;
     }
 }
