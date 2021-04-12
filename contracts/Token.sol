@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.7.3;
+pragma solidity ^0.6.6;
 
-contract Token {
-    string public name = "My Hardhat token";
-    string public symbol = "MHT";
-    uint256 public totalSupply = 1000000;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract Token is ERC20 {
+  constructor(uint256 initialSupply) public ERC20("Token", "TKN") {
+    _mint(msg.sender, initialSupply);
+  }
 }
