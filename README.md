@@ -1,27 +1,27 @@
-# hardhat-waffle-ethers-ts-template
+# test-staking
 Hardhat+Waffle+Ethers+Typescript template to compile and test a Solidity Smart Contract
 
 Install:
 ```
-npm install
+yarn install
 ```
 
 Compile:
 ```
-npm run compile
+yarn run compile
 ```
 
 Test:
 ```
-npm run test
+yarn run test
 ```
 
 Deploy to Rinkeby test network:
 ```
-npm run deploy
+yarn run deploy
 ```
 
 Run prettier on all your contracts:
 ```
-npm run prettier
+yarn run prettier
 ```
