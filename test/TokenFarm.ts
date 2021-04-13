@@ -14,9 +14,13 @@ describe('TokenFarm contract', () => {
   beforeEach('deploy', async () => {
     [owner, addr1, addr2] = await ethers.getSigners()
 
+    // const amount: bigint = BigInt(100_000_000_000_000_000_000)
+
     const ZCX = await ethers.getContractFactory('ZCX')
     zcx = (await ZCX.deploy()) as ZCX
-    zcx.initialize("ZCX", "ZCX");
+    zcx.initialize("ZCX", "ZCX")
+
+    zcx.transfer(addr1.address, 1_000_000)
 
     const TokenFarm = await ethers.getContractFactory('TokenFarm')
     tokenFarm = (await TokenFarm.deploy(zcx.address)) as TokenFarm
@@ -32,6 +36,20 @@ describe('TokenFarm contract', () => {
 
   it('ZCX token contract has the correct symbol', async () => {
     expect(await zcx.symbol()).to.equal('ZCX')
+  })
+
+  it('balance?', async () => {
+    console.log(`Balance of account ${owner.address}: ${(await zcx.balanceOf(owner.address)).toBigInt()} ZCH`)
+    console.log(`Balance of account ${addr1.address}: ${(await zcx.balanceOf(addr1.address)).toString()} ZCH`)
+
+    zcx.connect(addr1.address)
+    await zcx.approve(tokenFarm.address, 1000)
+    tokenFarm.connect(addr1.address)
+    tokenFarm.stakeTokens(1000)
+
+    console.log(`Balance of account ${owner.address}: ${(await zcx.balanceOf(owner.address)).toBigInt()} ZCH`)
+    console.log(`Balance of account ${addr1.address}: ${(await zcx.balanceOf(addr1.address)).toString()} ZCH`)
+
   })
 
 })
